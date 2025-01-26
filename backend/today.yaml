@@ -1,0 +1,44 @@
+# Version format ex. "0.0.1"
+version: "0.0.1"                            # Flow specification version
+
+# Basic metadata for the agent
+metadata:
+  name: "news-app"                               # Unique identifier
+  description: "This provides today's news around different topics"       # Flow purpose
+  author: "jagrati"                              # Must match your account username
+  tags: [news,daily-updates,]                       # Keywords for categorization
+  private: false                                       # Access control setting
+
+# Define the input variables required
+inputs:
+  input1:                                              # First input parameter
+    type: string                                       # Currently only String format
+    description: "time interval for which you want to get the news"
+    required: true
+    example: "today, this week, this month"
+  input2:                                              # Second input parameter
+    type: string
+    description: "domain of the news you want to get, comma separated"
+    required: true
+    example: "Technology, Business, Politics, Finance, Bollywood, Sports"
+
+# LLM configuration
+model:
+  provider: "meta"                            # e.g., anthropic, openai, meta, etc.
+  name: "llama-3.3-70b-instruct"                                   # Specific model identifier
+
+# Prompt template configuration
+prompt: |
+  I want to get news form you around the topic I will give below.
+  I want the structure of the news to be that each news must be separated by \n\n
+  Give me {input1} news about {input2}.
+  Give responses according to the current date/day.
+  Provide all the Major news related to the duration user provided.
+  Structure of the Response should be a Headline, A breif description and The link to the page to read it.
+  Don't add any lines from your end on the top or the bottom.
+  cant we get today's news?
+  
+
+# ReadME configuration
+readme: |
+  This flow will help you to get summarized news updates , for the duration you specify.
